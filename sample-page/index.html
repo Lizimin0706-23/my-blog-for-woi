@@ -11,9 +11,9 @@
 	
 	
 	
-	<meta name="theme-color" content="#ffffff">
-	<meta name="theme-color-rgb" content="255,255,255">
-	<meta name="theme-color-origin" content="#ffffff">
+	<meta name="theme-color" content="#926756">
+	<meta name="theme-color-rgb" content="146,103,86">
+	<meta name="theme-color-origin" content="#926756">
 	<meta name="argon-enable-custom-theme-color" content="true">
 
 
@@ -215,13 +215,13 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </script>
 <style id="themecolor_css">
 		:root{
-		--themecolor: #ffffff;
-		--themecolor-R: 255;
-		--themecolor-G: 255;
-		--themecolor-B: 255;
-		--themecolor-H: 0;
-		--themecolor-S: 0;
-		--themecolor-L: 100;
+		--themecolor: #926756;
+		--themecolor-R: 146;
+		--themecolor-G: 103;
+		--themecolor-B: 86;
+		--themecolor-H: 17;
+		--themecolor-S: 26;
+		--themecolor-L: 45;
 	}
 </style>
 <style id="theme_cardradius_css">
@@ -308,7 +308,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </div>
 <!--Banner-->
 <section id="banner" class="banner section section-lg section-shaped">
-	<div class="shape shape-style-1 shape-primary">
+	<div class="shape shape-style-1 shape-default">
 		<span></span>
 		<span></span>
 		<span></span>
@@ -321,16 +321,37 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	</div>
 
 		<div id="banner_container" class="banner-container container text-center">
-					<div class="banner-title text-white" data-interval="100"><span data-text=" " class="banner-title-inner"> </span>
-			<span data-text="--hitokoto--" class="banner-subtitle d-block"> </span></div>
+					<div class="banner-title text-white" data-interval="100"><span data-text="  " class="banner-title-inner"> </span>
+			</div>
 			</div>
 			<style>
 			section.banner{
-				background-image: url(-https://cdn.pixabay.com/photo/2015/03/18/11/01/sunset-679119_960_720.jpg) !important;
+				background-image: url(//bing.com/th?id=OHR.GreenJasper_ZH-CN3030401138_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) !important;
 			}
 		</style>
 		</section>
 
+	<style>
+				#content:before {
+			content: '';
+			display: block;
+			position: fixed;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			z-index: -2;
+			background: url(https://p.sda1.dev/32/02eb7a801538089a9f78b0ecb4d39a58/下载.jpg);
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			opacity: 1;
+			transition: opacity .5s ease;
+		}
+		html.darkmode #content:before{
+			filter: brightness(0.65);
+		}
+			</style>
 
 
 <div id="float_action_buttons" class="float-action-buttons fabtns-unloaded">
@@ -503,8 +524,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 					<i class="fa fa-clock-o" aria-hidden="true"></i>
 					<time title="发布于 2026-4-26 9:40:44 | 编辑于 2026-4-26 9:40:44">2026-4-26 9:40
 					</time>
-				</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-views">
-					<i class="fa fa-eye" aria-hidden="true"></i> 13</div>			<div class="post-meta-detail post-meta-detail-words">
+				</div>			<div class="post-meta-detail post-meta-detail-words">
 		<i class="fa fa-file-word-o" aria-hidden="true"></i><span> 159 字</span>
 		</div>
 		<div class="post-meta-devide">|</div>
@@ -649,7 +669,19 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	};
 </script>
 					<footer id="footer" class="site-footer card shadow-sm border-0">
-												<div>Theme <a href="https://github.com/solstice23/argon-theme" target="_blank"><strong>Argon</strong></a></div>
+						<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      new Typed('#hitokoto', {
+        strings: [data.hitokoto + " —— 「" + data.from + "」"],
+        typeSpeed: 60,
+        showCursor: false
+      });
+    })
+    .catch(console.error)
+</script>						<div>Theme <a href="https://github.com/solstice23/argon-theme" target="_blank"><strong>Argon</strong></a></div>
 					</footer>
 				</main>
 			</div>
