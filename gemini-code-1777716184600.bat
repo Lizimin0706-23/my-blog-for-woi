@@ -1,6 +1,4 @@
-﻿@echo off
-chcp 65001 >nul
-
+@echo off
 echo =========================================
 echo       wol's Blog Auto Push
 echo =========================================
@@ -15,11 +13,10 @@ git commit -m "Auto Update"
 
 echo.
 echo [3/3] Pushing to GitHub...
-:: 如果这里报错 reset，请务必开启代理软件的 TUN 模式
 git push -f origin main
 
 echo.
 echo =========================================
-echo Done! Check if you see "main -> main".
+echo Done!
 echo =========================================
 pause
