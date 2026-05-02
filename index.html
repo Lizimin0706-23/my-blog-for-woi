@@ -73,13 +73,13 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 					effect: "fadeIn"
 				},
 						fold_long_comments: false,
-			fold_long_shuoshuo: false,
+			fold_long_shuoshuo: true,
 			disable_pjax: false,
 			pjax_animation_durtion: 600,
 			headroom: "false",
 			waterflow_columns: "1",
 			code_highlight: {
-				enable: false,
+				enable: true,
 				hide_linenumber: false,
 				transparent_linenumber: false,
 				break_line: false			}
@@ -163,7 +163,40 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 			<script src="/wp-content/themes/argon/assets/vendor/smoothscroll/smoothscroll1.js"></script>
 	</head>
 
+<!-- 引入 Typed.js 库 -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 异步获取一言 API 语录
+    async function fetchQuotes() {
+        try {
+            // 获取 3 条随机语录进行循环
+            const requests = [
+                fetch('https://v1.hitokoto.cn/?c=d&c=i').then(res => res.json()),
+                fetch('https://v1.hitokoto.cn/?c=h&c=j').then(res => res.json()),
+                fetch('https://v1.hitokoto.cn/?c=k&c=b').then(res => res.json())
+            ];
+            const results = await Promise.all(requests);
+            return results.map(item => item.hitokoto);
+        } catch (e) {
+            return ["未来是绝对不变的。再怎么挣扎，都无法改变故事最终的结局。"];
+        }
+    }
+
+    // 初始化打字机效果
+    fetchQuotes().then(sentences => {
+        new Typed('#banner-typed', {
+            strings: sentences,
+            typeSpeed: 70,    // 打字速度
+            backSpeed: 40,    // 退格速度
+            backDelay: 2000,  // 每一句停顿 2 秒
+            loop: true,       // 循环播放
+            cursorChar: '|'   // 闪烁的光标
+        });
+    });
+  });
+</script>
 <style id="themecolor_css">
 		:root{
 		--themecolor: #007bff;
@@ -272,9 +305,14 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	</div>
 
 		<div id="banner_container" class="banner-container container text-center">
-					<div class="banner-title text-white"><span class="banner-title-inner">woI's Blog</span>
+					<div class="banner-title text-white" data-interval="100"><span data-text=" " class="banner-title-inner"> </span>
+			<span data-text="&lt;span id=&quot;banner-typed&quot;&gt;&lt;/span&gt;" class="banner-subtitle d-block"> </span></div>
 			</div>
-			</div>
+			<style>
+			section.banner{
+				background-image: url(//bing.com/th?id=OHR.GreenJasper_ZH-CN3030401138_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) !important;
+			}
+		</style>
 		</section>
 
 
@@ -349,11 +387,18 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 <div id="sidebar_mask"></div>
 <aside id="leftbar" class="leftbar widget-area" role="complementary">
+					<div id="leftbar_announcement" class="card bg-white shadow-sm border-0">
+				<div class="leftbar-announcement-body">
+					<div class="leftbar-announcement-title text-white">公告</div>
+					<div class="leftbar-announcement-content text-white">主题是Argon...</div>
+				</div>
+			</div>
 				<div id="leftbar_part1" class="widget widget_search card bg-white shadow-sm border-0">
 			<div class="leftbar-banner card-body">
-				<span class="leftbar-banner-title text-white">woI's Blog</span>
+				<span class="leftbar-banner-title text-white">一个很干的Blog...</span>
 
-								
+													<span class="leftbar-banner-subtitle text-white"><span class="hitokoto"></span></span>
+				
 			</div>
 
 			<ul id="leftbar_part1_menu" class="leftbar-menu"></ul>			<div class="card-body text-center leftbar-search-button">
@@ -374,9 +419,9 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div>
 					<div class="tab-content" style="padding: 10px 10px 0 10px;">
 												<div class="tab-pane fade text-center active show" id="leftbar_tab_overview" role="tabpanel" aria-labelledby="leftbar_tab_overview_btn">
-							<div id="leftbar_overview_author_image" style="background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cmVjdCBmaWxsPSIjNUU3MkU0MjIiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIi8+PGc+PGcgb3BhY2l0eT0iMC4zIj48cGF0aCBmaWxsPSIjNUU3MkU0IiBkPSJNNzQuMzksMzIuODZjLTAuOTgtMS43LTMuMzktMy4wOS01LjM1LTMuMDlINDUuNjJjLTEuOTYsMC00LjM3LDEuMzktNS4zNSwzLjA5TDI4LjU3LDUzLjE1Yy0wLjk4LDEuNy0wLjk4LDQuNDgsMCw2LjE3bDExLjcxLDIwLjI5YzAuOTgsMS43LDMuMzksMy4wOSw1LjM1LDMuMDloMjMuNDNjMS45NiwwLDQuMzctMS4zOSw1LjM1LTMuMDlMODYuMSw1OS4zMmMwLjk4LTEuNywwLjk4LTQuNDgsMC02LjE3TDc0LjM5LDMyLjg2eiIvPjwvZz48ZyBvcGFjaXR5PSIwLjgiPjxwYXRoIGZpbGw9IiM1RTcyRTQiIGQ9Ik02Mi4wNCwyMC4zOWMtMC45OC0xLjctMy4zOS0zLjA5LTUuMzUtMy4wOUgzMS43M2MtMS45NiwwLTQuMzcsMS4zOS01LjM1LDMuMDlMMTMuOSw0Mi4wMWMtMC45OCwxLjctMC45OCw0LjQ4LDAsNi4xN2wxMi40OSwyMS42MmMwLjk4LDEuNywzLjM5LDMuMDksNS4zNSwzLjA5aDI0Ljk3YzEuOTYsMCw0LjM3LTEuMzksNS4zNS0zLjA5bDEyLjQ5LTIxLjYyYzAuOTgtMS43LDAuOTgtNC40OCwwLTYuMTdMNjIuMDQsMjAuMzl6Ii8+PC9nPjwvZz48L3N2Zz4=)" class="rounded-circle shadow-sm" alt="avatar"></div>
-							<h6 id="leftbar_overview_author_name">woI's Blog</h6>
-														<nav class="site-state">
+							<div id="leftbar_overview_author_image" style="background-image: url(https://p.sda1.dev/32/e3e3a6e4f0deedd2af74ea10d36ceb46/头像.png)" class="rounded-circle shadow-sm" alt="avatar"></div>
+							<h6 id="leftbar_overview_author_name">woI Li</h6>
+							<h6 id="leftbar_overview_author_description">没有BUG的代码是不完美的！</h6>							<nav class="site-state">
 								<div class="site-state-item site-state-posts">
 									<a style="cursor: default;">
 										<span class="site-state-item-count">0</span>
@@ -435,13 +480,14 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	<main id="main" class="site-main article-list article-list-home" role="main">
 	
 					<footer id="footer" class="site-footer card shadow-sm border-0">
-												<div>Theme <a href="https://github.com/solstice23/argon-theme" target="_blank"><strong>Argon</strong></a> By solstice23</div>
+												<div>Theme <a href="https://github.com/solstice23/argon-theme" target="_blank"><strong>Argon</strong></a></div>
 					</footer>
 				</main>
 			</div>
 		</div>
 		<script src="/wp-content/themes/argon/argontheme.js?v1_3_5"></script>
 						
+					<link rel="stylesheet" href="/wp-content/themes/argon/assets/vendor/highlight/styles/vs2015.css">
 		
 	
 
